@@ -1,0 +1,19 @@
+{
+  "name": "pw-page",
+  "version": "1.0.0",
+  "description": "Projects & Workshops page component for IEEE UH",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000 --bind 127.0.0.1"
+  },
+  "keywords": [
+    "projects",
+    "workshops",
+    "ieee",
+    "uh",
+    "embeddable"
+  ],
+  "author": "IEEE University of Houston",
+  "license": "MIT"
+}

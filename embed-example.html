@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P&W Page - Embed Example</title>
+</head>
+<body>
+    <h1>Embedding P&W Page Example</h1>
+    
+    <p>
+        This file demonstrates how to embed the P&W Page into an existing HTML page.
+        The P&W Page is designed to be self-contained and embeddable as a component.
+    </p>
+
+    <h2>Method 1: Using an iframe</h2>
+    <pre><code>&lt;iframe 
+    src="path/to/index.html" 
+    width="100%" 
+    height="800px" 
+    frameborder="0" 
+    title="P&W Page"&gt;
+&lt;/iframe&gt;</code></pre>
+
+    <h2>Method 2: Using JavaScript to inject the component</h2>
+    <pre><code>// Create a container div in your HTML
+&lt;div id="pw-page-container"&gt;&lt;/div&gt;
+
+// In your JavaScript, load the P&W Page:
+fetch('path/to/index.html')
+    .then(response =&gt; response.text())
+    .then(html =&gt; {
+        // Extract just the body content
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        document.getElementById('pw-page-container')
+            .innerHTML = doc.body.innerHTML;
+    });</code></pre>
+
+    <h2>Method 3: Direct Import with Web Components</h2>
+    <p>
+        The P&W Page can be converted to a Web Component for true modularity.
+        This allows you to use it like a regular HTML tag:
+    </p>
+    <pre><code>&lt;pw-page&gt;&lt;/pw-page&gt;</code></pre>
+
+    <h2>Method 4: Copy HTML + Link Assets</h2>
+    <p>
+        You can also copy the HTML content directly into your page and link the CSS/JS files:
+    </p>
+    <pre><code>&lt;link rel="stylesheet" href="path/to/styles/main.css"&gt;
+
+&lt;!-- Your page content here --&gt;
+&lt;div id="pw-page-container" class="pw-page"&gt;
+    &lt;!-- Copy the contents of index.html body here --&gt;
+&lt;/div&gt;
+
+&lt;script src="path/to/js/main.js"&gt;&lt;/script&gt;
+&lt;script src="path/to/js/data.js"&gt;&lt;/script&gt;</code></pre>
+
+    <h2>File Structure</h2>
+    <pre><code>pw-page/
+├── index.html           (Main page structure)
+├── embed-example.html   (This file)
+├── styles/
+│   └── main.css        (All styles)
+└── js/
+    ├── main.js         (Main functionality)
+    └── data.js         (Sample data)</code></pre>
+
+    <h2>Customization</h2>
+    <p>
+        To customize the P&W Page for your specific content:
+    </p>
+    <ul>
+        <li>Edit <code>js/data.js</code> to add your projects, workshops, and resources</li>
+        <li>Modify <code>styles/main.css</code> to change colors and styling</li>
+        <li>Update section content in <code>index.html</code> as needed</li>
+    </ul>
+
+    <h2>CSS Variables for Theming</h2>
+    <p>
+        The stylesheet uses CSS variables for easy theming:
+    </p>
+    <pre><code>:root {
+    --primary-color: #6366f1;      /* Purple/Blue */
+    --secondary-color: #22c55e;    /* Green */
+    --tertiary-color: #ef4444;     /* Red */
+    --dark-color: #1f2937;         /* Dark Gray */
+    --light-color: #f3f4f6;        /* Light Gray */
+}</code></pre>
+
+    <p>
+        Override these variables in your own stylesheet to customize the appearance.
+    </p>
+</body>
+</html>
