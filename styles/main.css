@@ -349,13 +349,15 @@ body {
 
 .item-card {
     background: var(--bg-dark);
-    padding: 1.75rem;
+    padding: 0;
     border-radius: 10px;
     border: 1px solid var(--border-dark);
     transition: var(--transition);
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .item-card::before {
@@ -369,6 +371,7 @@ body {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
+    z-index: 10;
 }
 
 .item-card:hover::before {
@@ -382,9 +385,19 @@ body {
     box-shadow: 0 12px 24px rgba(99, 102, 241, 0.2);
 }
 
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
 .item-card h4 {
     color: var(--primary-color);
-    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    margin-left: 1.75rem;
+    margin-right: 1.75rem;
     font-size: 1.1rem;
     font-weight: 700;
 }
@@ -393,6 +406,9 @@ body {
     color: var(--text-muted);
     font-size: 0.9rem;
     line-height: 1.6;
+    margin-left: 1.75rem;
+    margin-right: 1.75rem;
+    margin-bottom: 1.75rem;
 }
 
 /* Subsection Items */
@@ -405,6 +421,7 @@ body {
     display: none;
     scroll-margin-top: 180px;
     border: 1px solid var(--border-dark);
+    overflow: hidden;
 }
 
 .subsection-item.active {
@@ -421,6 +438,88 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.subsection-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+/* Tall/vertical image suitable for flyers */
+.subsection-image-vertical {
+    width: 100%;
+    max-width: 480px;
+    height: 1200px; /* tall flyer aspect */
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Side-by-side layout for the weekly schedule (image left, text right) */
+.subsection-side-by-side {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+.subsection-side-by-side .subsection-image-wrap {
+    flex: 0 0 320px;
+}
+.subsection-side-by-side .subsection-image-wrap .subsection-image-vertical {
+    width: 100%;
+    height: auto;
+    max-height: 760px; /* reasonable tall display */
+    object-fit: cover;
+    margin: 0;
+    display: block;
+}
+.subsection-side-by-side .subsection-side-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+    .subsection-side-by-side {
+        flex-direction: column;
+    }
+    .subsection-side-by-side .subsection-image-wrap {
+        flex: none;
+        width: 100%;
+    }
+    .subsection-side-by-side .subsection-image-wrap .subsection-image-vertical {
+        height: 420px;
+        max-height: 420px;
+    }
+}
+
+/* Form embed styling */
+.form-embed {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+.form-embed iframe {
+    width: 100%;
+    height: 800px;
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    background: white;
+}
+.form-placeholder {
+    padding: 1rem;
+    background: var(--bg-dark);
+    border: 1px dashed var(--border-dark);
+    color: var(--text-secondary);
+    border-radius: 8px;
 }
 
 .subsection-item h3 {
@@ -445,13 +544,15 @@ body {
 
 .involvement-card {
     background: var(--bg-dark);
-    padding: 2rem;
+    padding: 0;
     border-radius: 10px;
     border: 1px solid var(--border-dark);
     transition: var(--transition);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .involvement-card:hover {
@@ -466,6 +567,9 @@ body {
     font-size: 1.25rem;
     font-weight: 700;
     margin: 0;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .involvement-card p {
@@ -473,6 +577,9 @@ body {
     font-size: 0.95rem;
     line-height: 1.6;
     margin: 0;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 0.5rem;
     flex-grow: 1;
 }
 
@@ -481,6 +588,10 @@ body {
     text-decoration: none;
     font-weight: 600;
     padding: 0.75rem 0;
+    margin: 0;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
     border-bottom: 2px solid transparent;
     transition: var(--transition);
     display: inline-block;
@@ -661,7 +772,160 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Members Grid */
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-dark);
+}
+
+.member-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.member-card:hover {
+    transform: translateY(-8px);
+}
+
+.member-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.member-card:hover .member-image {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+.member-card h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+}
+
+.member-role {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0 0 0.75rem 0;
+}
+
+.member-interests {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* Utility Classes */
+
+/* Workshop Grid */
+.workshop-grid {
+    display: grid;
+    gap: 1.5rem;
+    /* Force two columns on wide screens, collapse to one on smaller */
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 1.5rem;
+}
+
+.workshop-card {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+}
+
+.workshop-image {
+    width: 40%;
+    min-width: 240px;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.workshop-body {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.workshop-title {
+    color: var(--primary-color);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.15rem;
+}
+
+.workshop-date {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+}
+
+.workshop-desc {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 850px) {
+    .workshop-card {
+        flex-direction: column;
+    }
+
+    .workshop-image {
+        width: 100%;
+        height: 220px;
+        min-width: unset;
+    }
+}
+
+/* Edition tabs for multi-year projects (e.g., Chill Cook-off) */
+.edition-block {
+    margin-top: 1.5rem;
+}
+.edition-tabs {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+.edition-btn {
+    background: transparent;
+    border: 1px solid var(--border-dark);
+    color: var(--text-secondary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.edition-btn.active {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-cyan));
+    color: white;
+    border-color: transparent;
+}
+.edition-card { display: flex; background: var(--bg-dark); border:1px solid var(--border-dark); border-radius:10px; overflow:hidden; margin-bottom:1rem; }
+.edition-card .workshop-image { width: 240px; height: 180px; object-fit: cover; }
+.edition-card .workshop-body { padding: 0.75rem 1rem; }
+
+/* Ensure workshop grid becomes single column for narrower viewports */
+@media (max-width: 1100px) {
+    .workshop-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 .hidden {
     display: none;
 }
@@ -696,6 +960,238 @@ html {
 
 .mb-3 {
     margin-bottom: 1.5rem;
+}
+
+/* Gallery Section */
+.gallery-container {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Visual divider and sticky gallery heading */
+.global-gallery {
+    border-top: 2px solid var(--border-dark);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.gallery-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    /* no sticky behavior by default */
+    position: static;
+    top: auto;
+    background: transparent;
+    padding: 0;
+    z-index: auto;
+}
+
+/* Simple image grid (no captions) */
+.gallery-grid.simple {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+    align-items: start;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Loading spinner for gallery */
+.gallery-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 0;
+}
+
+.gallery-spinner {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.08);
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+.gallery-loading-text {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.gallery-section-group {
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 2rem;
+    background-color: var(--bg-surface);
+    overflow: hidden;
+}
+
+.gallery-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.gallery-section-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-cyan);
+    border-radius: 50%;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+    transform: translateY(-4px);
+}
+
+.gallery-item-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.gallery-item-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-item-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.gallery-item-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.gallery-item-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    flex: 1;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gallery-item-badge {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+    margin-bottom: 0.75rem;
+}
+
+.gallery-item-badge.workshop {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.gallery-item-badge.project {
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+}
+
+.gallery-item-badge.committee {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+}
+
+.gallery-item-badge.schedule {
+    background: linear-gradient(135deg, #f97316, #fb923c);
+}
+
+.gallery-item-date {
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .gallery-section-group {
+        padding: 1.5rem;
+    }
+
+    .gallery-item-image {
+        height: 180px;
+    }
+
+    .gallery-item-content {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-section-group {
+        padding: 1rem;
+    }
+
+    .gallery-section-title {
+        font-size: 1.2rem;
+    }
 }
 
 /* Scrollbar Styling */
