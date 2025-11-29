@@ -227,26 +227,7 @@ const PWData = {
             title: 'Meet The Members',
             picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/3.png?raw=true',
             description: 'Get to know the students behind the Projects & Workshops team. Learn about their interests, current projects, and how they got involved with P&W.',
-            members: [
-                {
-                    name: 'Member Name',
-                    role: 'Role / Position',
-                    image: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/ieeelogo.png?raw=true',
-                    interests: 'Interests & Projects'
-                },
-                {
-                    name: 'Member Name',
-                    role: 'Role / Position',
-                    image: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/ieeelogo.png?raw=true',
-                    interests: 'Interests & Projects'
-                },
-                {
-                    name: 'Member Name',
-                    role: 'Role / Position',
-                    image: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/ieeelogo.png?raw=true',
-                    interests: 'Interests & Projects'
-                }
-            ]
+            members: []
         },
         {
             id: 'pw-weekly-schedule',
@@ -271,7 +252,7 @@ const PWData = {
                 <ul>
                     <li>Electronics & PCB design</li>
                     <li>Embedded systems & microcontrollers</li>
-                    <li>Programming languages (Python, C++, Rust, etc.)</li>
+                    <li>Programming languages</li>
                     <li>Mechanical design & CAD</li>
                     <li>Signal processing</li>
                     <li>Robotics & control systems</li>

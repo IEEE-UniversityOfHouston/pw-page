@@ -772,10 +772,10 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Members Grid */
+/* Members Grid and Styling */
 .members-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
     padding-top: 2rem;
@@ -788,10 +788,16 @@ html {
     align-items: center;
     text-align: center;
     transition: var(--transition);
+    background: var(--bg-surface);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-dark);
 }
 
 .member-card:hover {
     transform: translateY(-8px);
+    border-color: var(--primary-color);
+    background: var(--bg-dark);
 }
 
 .member-image {
@@ -809,26 +815,210 @@ html {
     box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
 }
 
-.member-card h4 {
+.member-info {
+    width: 100%;
+}
+
+.member-name {
     color: var(--primary-color);
     font-size: 1.1rem;
     font-weight: 700;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.25rem 0;
 }
 
-.member-role {
+.member-nickname {
     color: var(--accent-cyan);
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
     font-weight: 600;
-    font-size: 0.95rem;
-    margin: 0 0 0.75rem 0;
 }
 
-.member-interests {
-    color: var(--text-muted);
+.member-subteam {
+    color: var(--text-secondary);
     font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0;
+    margin: 0 0 0.75rem 0;
+    font-weight: 500;
 }
+
+.member-statement {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0.75rem 0 0.75rem 0;
+    font-style: italic;
+}
+
+.member-links {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+.member-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    color: var(--primary-color);
+    transition: var(--transition);
+    border: 1px solid var(--border-dark);
+}
+
+.member-links a:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* Year Filter UI */
+.members-year-filter {
+    margin: 1rem 0 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg-surface);
+    border-radius: 10px;
+    border: 1px solid var(--border-dark);
+}
+
+.members-year-filter label {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.year-filter-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.year-filter-btn {
+    padding: 0.5rem 1rem;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-dark);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.year-filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.year-filter-btn.active {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-cyan));
+    color: white;
+    border-color: transparent;
+}
+
+/* Co-Chairs Section */
+.co-chairs-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--primary-color);
+}
+
+.co-chairs-section h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.co-chairs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.co-chair-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition);
+    background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(99, 102, 241, 0.1) 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--primary-color);
+}
+
+.co-chair-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.co-chair-card .member-image {
+    border-color: var(--accent-orange);
+}
+
+.co-chair-card:hover .member-image {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+.co-chair-years {
+    color: var(--accent-orange);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0.5rem 0 0.75rem 0;
+}
+
+/* Members Section Container */
+.members-section {
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .members-grid,
+    .co-chairs-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .member-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .year-filter-buttons {
+        gap: 0.5rem;
+    }
+
+    .year-filter-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .members-grid,
+    .co-chairs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .member-card,
+    .co-chair-card {
+        padding: 1rem;
+    }
+
+    .member-image {
+        width: 100px;
+        height: 100px;
+    }
+}
+
 
 /* Utility Classes */
 

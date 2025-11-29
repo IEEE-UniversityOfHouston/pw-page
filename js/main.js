@@ -16,6 +16,12 @@ class PWPage {
         // Auto-populate all galleries from GitHub
         await GalleryLoader.autoPopulateAllGalleries();
         
+        // Initialize members loader
+        if (typeof MembersLoader !== 'undefined') {
+            MembersLoader.init();
+            await MembersLoader.autoPopulateMembers();
+        }
+        
         this.setupEventListeners();
         this.loadContent();
     }
@@ -60,6 +66,19 @@ class PWPage {
         });
     }
 
+    // Determine which top-level section a subsection belongs to
+    getParentSectionForSubsection(subsectionId) {
+        try {
+            if (typeof PWData === 'undefined') return null;
+            const inList = (arr) => Array.isArray(arr) && arr.some(x => x.id === subsectionId);
+            if (inList(PWData.workshops)) return 'workshops';
+            if (inList(PWData.projects)) return 'projects';
+            if (inList(PWData.committee)) return 'committee';
+            if (inList(PWData.getInvolved)) return 'get-involved';
+        } catch (_) {}
+        return null;
+    }
+
     toggleSection(sectionId) {
         // Hide all main sections
         document.querySelectorAll('.content-section').forEach(section => {
@@ -94,6 +113,12 @@ class PWPage {
     }
 
     showSubsection(subsectionId) {
+        // Ensure the correct top-level section is visible
+        const parent = this.getParentSectionForSubsection(subsectionId);
+        if (parent && parent !== this.currentSection) {
+            this.toggleSection(parent);
+        }
+
         // Hide all subsections
         document.querySelectorAll('.subsection-item').forEach(item => {
             item.classList.remove('active');
@@ -375,16 +400,94 @@ class PWPage {
             // Members grid (if present)
             let membersHtml = '';
             if (subsection.members && subsection.members.length) {
-                membersHtml = `
-                    <div class="members-grid">
-                        ${subsection.members.map(member => `
-                            <div class="member-card">
+                // Collect all unique years for filtering
+                const allYears = new Set();
+                subsection.members.forEach(m => {
+                    (m.years || []).forEach(y => allYears.add(y));
+                });
+                const yearsArray = Array.from(allYears).sort().reverse();
+                const currentYear = new Date().getFullYear().toString();
+                const defaultYear = yearsArray.find(y => y === currentYear) || (yearsArray.length > 0 ? yearsArray[0] : null);
+                
+                // Separate co-chairs from regular members
+                const regularMembers = subsection.members.filter(m => !m.isCoChair);
+                const coChairs = subsection.members.filter(m => m.isCoChair);
+                
+                // Build year filter buttons
+                const yearFilterButtons = yearsArray.length > 1 ? `
+                    <div class="members-year-filter">
+                        <label>Filter by year:</label>
+                        <div class="year-filter-buttons">
+                            ${yearsArray.map(year => `
+                                <button class="year-filter-btn ${year === defaultYear ? 'active' : ''}" data-year="${year}">${year}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : '';
+                
+                // Build regular members grid
+                const regularMembersGrid = `
+                    <div class="members-grid" data-member-type="regular">
+                        ${regularMembers.map(member => `
+                            <div class="member-card" data-years="${(member.years || []).join(',')}">
                                 <img src="${member.image}" alt="${member.name}" class="member-image">
-                                <h4>${member.name}</h4>
-                                <p class="member-role">${member.role}</p>
-                                <p class="member-interests">${member.interests}</p>
+                                <div class="member-info">
+                                    <h4 class="member-name">${member.name}</h4>
+                                    ${member.nickname ? `<p class="member-nickname">${member.nickname}</p>` : ''}
+                                    ${member.subteam ? `<p class="member-subteam">${member.subteam}</p>` : ''}
+                                    ${member.graduatingSemester ? `<p class="member-grad">Graduating: ${member.graduatingSemester}</p>` : ''}
+                                    ${member.pwStatement ? `<p class="member-statement">${member.pwStatement}</p>` : ''}
+                                    ${member.imageUrl ? `<div class="member-image-url"><img src="${member.imageUrl}" alt="${member.name} image url" class="member-image-alt"></div>` : ''}
+                                    <div class="member-links">
+                                        ${member.github ? `<a href="${member.github}" target="_blank" rel="noopener" title="GitHub">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </a>` : ''}
+                                        ${member.linkedin ? `<a href="${member.linkedin}" target="_blank" rel="noopener" title="LinkedIn">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 15 0 14.487 0 13.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm11.55 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+                        </a>` : ''}
+                                    </div>
+                                </div>
                             </div>
                         `).join('')}
+                    </div>
+                `;
+                
+                // Build co-chairs section (displayed at the bottom)
+                const coChairsSection = coChairs.length > 0 ? `
+                    <div class="co-chairs-section">
+                        <h3>Co-Chairs</h3>
+                        <div class="co-chairs-grid">
+                            ${coChairs.map(coChair => `
+                                <div class="co-chair-card" data-years="${(coChair.coChairYears || []).join(',')}">
+                                    <img src="${coChair.image}" alt="${coChair.name}" class="member-image">
+                                    <div class="member-info">
+                                        <h4 class="member-name">${coChair.name}</h4>
+                                        ${coChair.nickname ? `<p class="member-nickname">${coChair.nickname}</p>` : ''}
+                                        ${coChair.subteam ? `<p class="member-subteam">${coChair.subteam}</p>` : ''}
+                                        ${coChair.graduatingSemester ? `<p class="member-grad">Graduating: ${coChair.graduatingSemester}</p>` : ''}
+                                        <p class="co-chair-years">Co-Chair: ${(coChair.coChairYears || []).join(', ')}</p>
+                                        ${coChair.pwStatement ? `<p class="member-statement">${coChair.pwStatement}</p>` : ''}
+                                        ${coChair.imageUrl ? `<div class="member-image-url"><img src="${coChair.imageUrl}" alt="${coChair.name} image url" class="member-image-alt"></div>` : ''}
+                                        <div class="member-links">
+                                            ${coChair.github ? `<a href="${coChair.github}" target="_blank" rel="noopener" title="GitHub">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                            </a>` : ''}
+                                            ${coChair.linkedin ? `<a href="${coChair.linkedin}" target="_blank" rel="noopener" title="LinkedIn">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 15 0 14.487 0 13.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm11.55 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+                        </a>` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : '';
+                
+                membersHtml = `
+                    <div class="members-section">
+                        ${yearFilterButtons}
+                        ${regularMembersGrid}
+                        ${coChairsSection}
                     </div>
                 `;
             }
@@ -531,6 +634,28 @@ class PWPage {
                     contents.forEach(c => {
                         c.classList.toggle('hidden', c.getAttribute('data-edition') !== target);
                     });
+                });
+            });
+        });
+
+        // Attach year filter handlers for members section
+        container.querySelectorAll('.year-filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const selectedYear = btn.getAttribute('data-year');
+                const filterContainer = btn.closest('.members-year-filter');
+                const membersSection = filterContainer.closest('.members-section');
+                const memberCards = membersSection.querySelectorAll('.member-card');
+                
+                // Update active button
+                filterContainer.querySelectorAll('.year-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter member cards by selected year
+                memberCards.forEach(card => {
+                    const yearsStr = card.getAttribute('data-years') || '';
+                    const years = yearsStr.split(',').filter(y => y.trim());
+                    const shouldShow = years.includes(selectedYear);
+                    card.style.display = shouldShow ? '' : 'none';
                 });
             });
         });
