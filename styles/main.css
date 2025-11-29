@@ -197,6 +197,7 @@ body {
 
 
 .carousel-nav {
+    display: none; /* Hidden per user request */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -283,10 +284,9 @@ body {
     padding: 2.5rem;
     scroll-margin-top: 180px;
     transition: var(--transition);
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     display: none;
-    min-height: calc(100vh - 600px);
 }
 
 .content-section.active-section {
@@ -358,6 +358,49 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+.item-card {
+    background: var(--bg-dark);
+    padding: 0;
+    border-radius: 10px;
+    border: 1px solid var(--border-dark);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Projects layout: side-by-side image and description */
+#projects-list .item-card {
+    flex-direction: row;
+    min-height: 300px;
+}
+
+#projects-list .item-card .card-image {
+    width: 40%;
+    min-width: 300px;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+#projects-list .item-card > div {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+#projects-list .item-card h4 {
+    margin-bottom: 1rem;
+}
+
+#projects-list .item-card p {
+    line-height: 1.6;
 }
 
 .item-card::before {

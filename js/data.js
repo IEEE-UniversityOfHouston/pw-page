@@ -22,14 +22,14 @@ const PWData = {
         {
             id: 'micromouse',
             name: 'Micromouse',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/roboticsuh.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/mm_f24_1.jpg?raw=true',
             description: 'Build a an autonomous robot designed to tackle a maze-solving competition!'
         },
         {
             id: 'battlebots',
             name: 'Battlebots',
             picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/roboticsuh.png?raw=true',
-            description: 'Join a community of combat robotics enthusiasts!'
+            description: 'Join a community of combat robotics enthusiasts! Collaboration with Robotics@UH.'
         }
     ],
 
@@ -37,19 +37,19 @@ const PWData = {
         {
             id: 'circuit-speed-dating',
             name: 'Circuit Speed Dating',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/3.png?raw=true',
+            picture: 'https://images.weserv.nl/?url=' + encodeURIComponent('https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/csd_f25_19.HEIC?raw=true') + '&output=webp',
             description: 'Get to know analog circuits in quick, fun sessions.'
         },
         {
             id: 'chill-cook-off',
             name: 'Chill Cook-off Initiative',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/3.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/cco-f25-prototile2.jpg?raw=true',
             description: 'A collaborative project we showcase for our Annual Chili Cook-off.'
         },
         {
             id: 'meet-members',
             name: 'Meet The Members',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/3.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/csd_f25_27.jpg?raw=true',
             description: 'Get to know the P&W team.'
         }
     ],
@@ -65,7 +65,7 @@ const PWData = {
         {
             id: 'pw-interest-form',
             title: 'Interest Form',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/4.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/csd_f25_12.HEIC?raw=true',
             description: 'So we can tailor our P&W committee meetings to your availability, please fill out this form! There is an additional section for members interested in joining the P&W Committee! Join Now!',
             link: '#pw-interest-form',
             linkText: 'Fill Form'
@@ -73,7 +73,7 @@ const PWData = {
         {
             id: 'propose-workshop',
             title: 'Propose a Workshop',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/1.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/ws-f25-kicadplugins.png?raw=true',
             description: 'Have a skill to teach? Apply to collaborate on a workshop. You\'re also welcome to contact us directly.',
             link: '#propose-workshop',
             linkText: 'Propose Here'
@@ -81,7 +81,7 @@ const PWData = {
         {
             id: 'contact-info',
             title: 'Contact Us',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/ieee.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/ieeelogo.png?raw=true',
             description: 'Reach out to Kenny or Behlool with questions or ideas.',
             link: '#contact-info',
             linkText: 'Contact Info'
@@ -92,42 +92,42 @@ const PWData = {
         {
             id: 'past-workshops',
             title: 'Past Workshops',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/1.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/ws_f25_pcb1.HEIC?raw=true',
             description: 'Archive of past semester workshops',
             workshops: [
                 {
                     id: 'fall-2025-intro-pcbs',
                     title: 'Intro to PCBs',
                     date: 'Sept 26, 2025',
-                    picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/1.png?raw=true',
+                    picture: 'https://github.com/IEEE-UniversityOfHouston/workshops/blob/main/promos/F25-PCBDESIGN.png?raw=true',
                     description: 'Reading and writing schematics (+ breadboard basics), Schematics & PCBs in EasyEDA and KiCad, Symbols and footprints in KiCad, Exporting Gerber files.'
                 },
                 {
                     id: 'fall-2025-intro-python',
                     title: 'Intro to Python (IEEE-NSM)',
                     date: 'Oct 1, 2025',
-                    picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/1.png?raw=true',
+                    picture: 'https://github.com/IEEE-UniversityOfHouston/workshops/blob/main/promos/F25-NSM-PYTHON.png?raw=true',
                     description: 'Covered variables, data types, indexing, control flow, functions, and libraries.'
                 },
                 {
                     id: 'fall-2025-kicad-plugins',
                     title: 'KiCad Plugins',
                     date: 'Oct 10, 2025',
-                    picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/1.png?raw=true',
+                    picture: 'https://github.com/IEEE-UniversityOfHouston/workshops/blob/main/promos/F25-KICAD-PLUGINS.png?raw=true',
                     description: 'Plugin installation from GitHub and Plugin Manager. Automation, fabrication, and documentation plugins demonstrated.'
                 },
                 {
                     id: 'fall-2025-git-linux',
                     title: 'Intro to Git & Linux',
                     date: 'Oct 14, 2025',
-                    picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/1.png?raw=true',
+                    picture: 'https://github.com/IEEE-UniversityOfHouston/workshops/blob/main/promos/F25-GITLINUX.png?raw=true',
                     description: 'GNU/Linux overview, Git basics, environment setup, SSH access, and CLI practice.'
                 },
                 {
                     id: 'fall-2025-soldering',
                     title: 'Soldering Workshop (AIAA)',
                     date: 'Nov 18, 2025',
-                    picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/1.png?raw=true',
+                    picture: 'https://github.com/IEEE-UniversityOfHouston/workshops/blob/main/promos/F25-AIAAXROBOTICS-SOLDERING.png?raw=true',
                     description: 'Soldering header pins, soldering on perf boards, desoldering, wire soldering, and crimping connectors.'
                 }
             ]
@@ -179,7 +179,7 @@ const PWData = {
         {
             id: 'micromouse',
             title: 'Micromouse',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/roboticsuh.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/mm_f24_1.jpg?raw=true',
             description: `<div class="project-details">
                 <h4>Autonomous Maze-Solving Robot Competition</h4>
                 <p><strong>Overview:</strong> Micromouse is an international competition where students design and build small robots that autonomously navigate and solve mazes.</p>
@@ -193,31 +193,27 @@ const PWData = {
             title: 'Battlebots',
             picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/roboticsuh.png?raw=true',
             description: `<div class="project-details">
-                <h4>Design and Build Competing Battle Robots</h4>
-                <p><strong>Overview:</strong> Battlebots is a thrilling robotics competition where teams design and build robots that compete in combat arenas.</p>
-                <p><strong>What We Do:</strong> We design weapon systems, armor plating, drive mechanisms, and control electronics for maximum competitive advantage.</p>
-                <p><strong>Skills Involved:</strong> Mechanical engineering, CAD design, electronics, motor control, structural analysis, teamwork.</p>
-                <p><strong>Get Involved:</strong> Join us in designing cutting-edge combat robots! Experience ranges from CAD to circuit design to metal fabrication.</p>
+                <h4>tbd</h4>
             </div>`
         },
         {
             id: 'circuit-speed-dating',
             title: 'Circuit Speed Dating',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/3.png?raw=true',
+            picture: 'https://github.com/IEEE-UniversityOfHouston/circuit-speed-dating/blob/main/fall_2025/F25-CSD-V2.png?raw=true',
             description: 'Circuit Speed Dating is a series of biweekly events that aims to introduce you to iconic analog circuits. Float from station to station to learn about all the circuits our committee prepared that week!'
         },
         {
             id: 'chill-cook-off',
             title: 'Chill Cook-off Initiative',
             picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/3.png?raw=true',
-            description: 'For decades, IEEE@UH has hosted an annual Chili Cook-Off. This year, we want to showcase our own DIY interactive dancefloor. Interested? Consider joining the P&W Committee!',
+            description: 'For decades, IEEE@UH has hosted an annual Chili Cook-Off. Starting this year, we want to design and assemble interactive installations at each Chili Cook-Off! Interested? Consider joining the P&W Committee!',
             editionGroups: {
                 thisYear: {
                     id: 'cco-2025',
                     year: '2025',
                     title: 'Chill Cook-off 2025',
-                    picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/3.png?raw=true',
-                    description: '<p>Our 2025 Chill Cook-off will spotlight team-built interactive installations and live demos. Competitors design a small interactive project, bring it to the event, and we celebrate creativity.</p>'
+                    picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/cco-f25-prototile1.jpg?raw=true',
+                    description: '<p>Our 2025 Chill Cook-off will feature a DIY interactive dance floor built by yours truly! -PW Committee.</p>'
                 },
                 past: []
             }
@@ -232,7 +228,7 @@ const PWData = {
         {
             id: 'pw-weekly-schedule',
             title: 'P&W Weekly Schedule',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/assets/pw_promo.png?raw=true',
+            picture: 'https://images.weserv.nl/?url=' + encodeURIComponent('https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/ws_f25_pcb1.HEIC?raw=true') + '&output=webp',
             description: 'Check our meeting times and workshop schedule to plan ahead and never miss an event! We meet weekly on [Day] at [Time] in [Location].'
         },
         {

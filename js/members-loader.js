@@ -144,6 +144,12 @@ class MembersLoader {
                     }
                 }
                 
+                // Convert HEIC images to web-compatible format using proxy
+                if (imageUrl && (imageUrl.toLowerCase().endsWith('.heic') || imageUrl.toLowerCase().includes('.heic'))) {
+                    const encodedUrl = encodeURIComponent(imageUrl);
+                    imageUrl = `https://images.weserv.nl/?url=${encodedUrl}&output=webp`;
+                }
+                
                 // Parse years in P&W (may be comma-separated)
                 const yearsStr = row['years'] || '';
                 const years = yearsStr
