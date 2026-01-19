@@ -8,7 +8,7 @@ const GalleryLoader = {
     // Topic prefixes
     topics: {
         'past-workshops': 'ws',
-        'upcoming-workshops': 'ws',
+        // 'upcoming-workshops': 'ws',
         'circuit-speed-dating': 'csd',
         'micromouse': 'mm',
         'battlebots': 'bb',
