@@ -64,8 +64,9 @@ const PWData = {
         },
         {
             id: 'pw-interest-form',
-            title: 'Interest Form',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/csd_f25_12.HEIC?raw=true',
+					  title: 'Interest Form',
+				 // Fixed image URL: converted .HEIC to webp via weserv.nl
+						picture: 'https://images.weserv.nl/?url=' + encodeURIComponent('https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/csd_f25_12.HEIC?raw=true') + '&output=webp',
             description: 'So we can tailor our P&W committee meetings to your availability, please fill out this form! There is an additional section for members interested in joining the P&W Committee! Join Now!',
             link: '#pw-interest-form',
             linkText: 'Fill Form'
@@ -91,8 +92,9 @@ const PWData = {
     subsections: [
         {
             id: 'past-workshops',
-            title: 'Past Workshops',
-            picture: 'https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/ws_f25_pcb1.HEIC?raw=true',
+		    		title: 'Past Workshops',
+		  	 // Fixed image URL: converted .HEIC to webp via weserv.nl
+				  	picture: 'https://images.weserv.nl/?url=' + encodeURIComponent('https://github.com/IEEE-UniversityOfHouston/media/blob/main/photographs/ws_f25_pcb1.HEIC?raw=true') + '&output=webp',
             description: 'Archive of past semester workshops',
             workshops: [
                 {
